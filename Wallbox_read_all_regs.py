@@ -1,11 +1,10 @@
 #######################################################
 # Modbus reading Python script.                       #
 # More details in document                            #
-# Modbus Map Versicharge Gen 3                        #
+# Modbus Map Versicharge Gen 3  FW 2.118              #
 #                                                     #
 # Version 1.0                                         #
-# November, 2022                                       #
-# Author: Achim                                       #
+# 2022, achgut                                        #
 #######################################################
 
 #Imports
@@ -28,8 +27,6 @@ clientIP="192.168.178.63" #Charger's IP address
 
 ################################################
 
-# Read data
-# Charger data
 try:
     #Try to connect to client
     client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
@@ -276,7 +273,7 @@ try:
     print(strStatus)
 #Power L1 - L3
     response = client.read_holding_registers(address=1662,count=4,unit=UNIT)
-    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers[0:3]) + " " + str(response.registers[3] / 10) + " W"
+    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers) + " " + str(response.registers[3] / 10) + " W"
     print(strStatus)
 #Power Factor L1 - L3
     response = client.read_holding_registers(address=1666,count=4,unit=UNIT)
@@ -304,16 +301,31 @@ except:
     print("-" * separator)
     print("An error has occurred during cluster data reading!")
 
-####################################################################################################################
-var = 1710
+print("-" * separator)
+
+#Special Read Register
+print("*" * separator)
+print("Reading data from Versicharge Wallbox: " + str(clientIP) + ":" + str(clientPort))
+print("-" * separator)
+print(">>> Registerabfragen nach Bereich <<<")
+print("*" * separator)
+
+start = 1690              # Anfangsregister
+end = 1696                # Enderegister +1
+anzahl = 2                # Anzahl der Bytes
+helper = 0
 print("-" * separator)  
-while var < 1852 :
-  response = client.read_holding_registers(address=var,count=2,unit=UNIT)
+while start < end :       
+  response = client.read_holding_registers(address=start,count=anzahl,unit=UNIT) 
   try: 
-    strStatus = "Register " + str(var) + " : " + str(response.registers[0]) + " : " + str(response.registers[1])
+    strStatus = "Register " + str(start) + " (" + str(anzahl) + " Bytes): " 
+    while helper < anzahl :   
+      strStatus = strStatus + " : " + str(response.registers[helper])
+      helper += 1                                                         
     print(strStatus)
   except:
-    print("Register " + str(var) + " :Error") 
-  var += 1
+    print("Register " + str(start) + " :Error") 
+  start += 1
+  helper = 0
  
 print('Hello user Ende Abfrage')

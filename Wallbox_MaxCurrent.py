@@ -1,11 +1,13 @@
 #######################################################
-# Modbus reading Python script.                       #
-# More details in document                            #
+# Modbus writing Python script.                       #
+# Set Max Charging Current                            #
+# 1 Int als Argument mitgeben                         #
+#                                                     #
 # Modbus Map Versicharge Gen 3                        #
 #                                                     #
 # Version 1.0                                         #
-# November, 2022                                       #
-# Author: Achim                                       #
+# November, 2022                                      #
+# Author: Achim            achgut                     #
 #######################################################
 
 #Imports

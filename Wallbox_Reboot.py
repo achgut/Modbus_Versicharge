@@ -4,8 +4,8 @@
 # Modbus Map Versicharge Gen 3                        #
 #                                                     #
 # Version 1.0                                         #
-# November, 2022                                       #
-# Author: Achim                                       #
+# November, 2022                                      #
+# Author: Achim      achgut                           #
 #######################################################
 
 #Imports
