@@ -1,0 +1,45 @@
+********************************************************************************
+Reading data from Versicharge Wallbox: 192.168.178.63:502
+--------------------------------------------------------------------------------
+>>> REAL-TIME VALUES <<<
+********************************************************************************
+--------------------------------------------------------------------------------
+>>> Charger Specification <<<
+--------------------------------------------------------------------------------
+Manufacturer: Siemens AG
+Seriennummer: JAAL29E072
+Order Number: 8EM1310-3EJ04-0GA0  
+Production Date: 23.18.2021
+FW: 2.118     4.3.14    
+Modbus Table: 7
+Rated Current: 32A
+Current DIP Switch: 32A
+--------------------------------------------------------------------------------
+>>> RFID Status <<<
+--------------------------------------------------------------------------------
+RFID Status: 0
+RFID disabled
+RFID Whitelist Anzahl: 2
+RFID Whitelist UID RFID 0: 0xa94d6b4a
+RFID Whitelist UID RFID 1 (Florian i3): 0x79466c4a
+RFID Whitelist UID RFID 2: 0x0
+--------------------------------------------------------------------------------
+>>> Charger Status <<<
+--------------------------------------------------------------------------------
+Temperatur PCB: 4°C
+Charger Status: 1
+Charger Status: A (Power On)
+Charger Delay: No Delay
+--------------------------------------------------------------------------------
+>>> Actual Data <<<
+--------------------------------------------------------------------------------
+Max Current: 32A
+Pause an
+Phases for Charging: 3 Phasen
+Charging Current (L1 L2 L3 Sum): [0, 0, 0, 0] A
+Charging Voltage (L1 L2 L3): [0, 0, 0] V zu N
+Charging Power (L1 L2 L3 Sum): [0, 0, 0] 0.0 W
+Power Factor (L1 L2 L3 Sum): 0.0 0.0 0.0 0.0 
+Apparent Power (L1 L2 L3 Sum): [0, 0, 0, 0] VA
+Reactive Power (L1 L2 L3 Sum): [0, 0, 0, 0] VA reactive
+Total Charging Energy (kWh): 133677.0kWh
