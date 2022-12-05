@@ -179,30 +179,21 @@ try:
 
 # RFID Whitelist
     response = client.read_holding_registers(address=87,count=1,unit=UNIT)
-    strStatus = "RFID Whitelist Anzahl: " + str(response.registers[0])
+    whitelistcount = response.registers[0]
+    strStatus = "RFID Whitelist Anzahl: " + str(whitelistcount)
     print(strStatus)
 
-# RFID UID 0
-    response = client.read_holding_registers(address=88,count=5,unit=UNIT)
-    output = response.registers
-    zahl = output[3] << 16
-    zahl |= output[4]
-    strStatus = "RFID Whitelist UID RFID 0: " + str(hex(zahl))
-    print(strStatus)
-# RFID UID 1
-    response = client.read_holding_registers(address=93,count=5,unit=UNIT)
-    output = response.registers
-    zahl = output[3] << 16
-    zahl |= output[4]
-    strStatus = "RFID Whitelist UID RFID 1 (Florian i3): " + str(hex(zahl))
-    print(strStatus)
-# RFID UID 2
-    response = client.read_holding_registers(address=98,count=5,unit=UNIT)
-    output = response.registers
-    zahl = output[3] << 16
-    zahl |= output[4]
-    strStatus = "RFID Whitelist UID RFID 2: " + str(hex(zahl))
-    print(strStatus)
+    count = 0
+    reg = 88
+    while count < whitelistcount :
+      response = client.read_holding_registers(address=reg,count=5,unit=UNIT)
+      output = response.registers
+      zahl = output[3] << 16
+      zahl |= output[4]
+      strStatus = "RFID Whitelist UID RFID " + str(count) + ": " + str(hex(zahl))
+      print(strStatus)
+      count += 1
+      reg += 5
 
     print("-" * separator)
     print(">>> Charger Status <<<")
