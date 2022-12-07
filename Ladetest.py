@@ -11,7 +11,7 @@ try:
   
   while True :
     print("Lese")
-    Wallbox_read_Actual
+    print(Wallbox_read_Actual)
     print("zurück Go to sleep")
  
     time.sleep(2)
