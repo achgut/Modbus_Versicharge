@@ -341,6 +341,20 @@ try:
   #Charger Delay
     response = client.read_holding_registers(address=26,count=1,unit=UNIT)
     print("Charger Delay: " + str(response.registers[0]))
+  
+  #RFID on?
+    response = client.read_holding_registers(address=79,count=1,unit=UNIT)
+    strStatus = "RFID Status: " + str(response.registers[0])
+    print(strStatus)
+    if(response.registers == [0]):
+      strStatus = "RFID disabled" 
+      print(strStatus)
+    elif(response.registers == [1]):
+      strStatus = "RFID enabled" 
+      print(strStatus)
+    else:
+      print("RFID nicht erkannt")  
+      
   #MaxCurrent
     response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
     if (response.registers[0] == Currentstatus):
