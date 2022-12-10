@@ -290,22 +290,19 @@ try:
     response = client.read_holding_registers(address=1651,count=3,unit=UNIT)
     strStatus = "Charging Voltage (L1 L2 L3): " + str(response.registers) + " V zu N"
     print(strStatus)
-#Power L1 - L3
-    response = client.read_holding_registers(address=1662,count=4,unit=UNIT)
-    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers) + " " + str(response.registers[3] / 10) + " W"
-    print(strStatus)
 #Power Factor L1 - L3
     response = client.read_holding_registers(address=1666,count=4,unit=UNIT)
     strStatus = "Power Factor (L1 L2 L3 Sum): " + str(response.registers[0] / 100) + " " + str(response.registers[1] / 100) + " "  + str(response.registers[2] / 100) + " "  + str(response.registers[3] / 100) + " "
+    print(strStatus)
+#Power L1 - L3
+    response = client.read_holding_registers(address=1662,count=4,unit=UNIT)
+    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers) + " " + str(response.registers[3] / 10) + " W"
     print(strStatus)
 #Apparent Power L1 - L3
     response = client.read_holding_registers(address=1670,count=4,unit=UNIT)
     strStatus = "Apparent Power (L1 L2 L3 Sum): " + str(response.registers) + " VA"
     print(strStatus)
-#Reactive Power L1 - L3
-    response = client.read_holding_registers(address=1674,count=4,unit=UNIT)
-    strStatus = "Reactive Power (L1 L2 L3 Sum): " + str(response.registers) + " VA reactive"
-    print(strStatus)
+
 #Total Charing engery
     response = client.read_holding_registers(address=1692,count=2,unit=UNIT)
     output = response.registers

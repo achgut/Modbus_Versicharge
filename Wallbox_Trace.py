@@ -5,14 +5,12 @@ from struct import *
 import Wallbox_read_Static
 import Wallbox_read_Actual
 
-Wallbox_read_Static
+Wallbox_read_Static.main()
 
 try:
   
   while True :
-    print("Lese")
-    print(Wallbox_read_Actual)
-    print("zurück Go to sleep")
+    Wallbox_read_Actual.main()
  
     time.sleep(2)
 
