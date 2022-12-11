@@ -29,7 +29,9 @@ clientIP="192.168.178.63" #Charger's IP address
 
 # Read data
 # Charger data
-try:
+
+def main():
+  try:
     #Try to connect to client
     client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
 
@@ -64,7 +66,10 @@ try:
     else:
       print("Phase nicht erkannt")  
 
-except:
+  except:
     print("-" * separator)
     print("An error has occurred during cluster data reading!")
 
+
+if __name__ == "__main__":
+  main()
