@@ -189,9 +189,12 @@ def main():
     while count < whitelistcount :
       response = client.read_holding_registers(address=reg,count=5,unit=UNIT)
       output = response.registers
+      zahl2 = output[0] 
+      zahl1 = output[1] << 16
+      zahl1 |= output[2] 
       zahl = output[3] << 16
       zahl |= output[4]
-      strStatus = "RFID Whitelist UID RFID " + str(count) + ": " + str(hex(zahl))
+      strStatus = "RFID Whitelist UID RFID " + str(count) + ": " + str(hex(zahl2)) + str(hex(zahl1))[2:] + str(hex(zahl))[2:]
       print(strStatus)
       count += 1
       reg += 5
