@@ -50,9 +50,9 @@ print("-" * separator)
 print(">>> Registerabfragen nach Bereich <<<")
 print("*" * separator)
 
-start = 1660             # Anfangsregister
-end = 1663            # Enderegister +1
-anzahl = 1               # Anzahl der Bytes
+start = 1653            # Anfangsregister
+end = 1660            # Enderegister +1
+anzahl = 4               # Anzahl der Bytes
 helper = 0
 print("-" * separator)  
 while start < end :       
@@ -70,18 +70,5 @@ while start < end :
   start += 1
   helper = 0
 
-## RFID HEX READ
-#anzahl = 1
-#reg = 86
-#while anzahl < 3 :
-#  response = client.read_holding_registers(address=reg,count=anzahl,unit=UNIT)
-#  print(response)
-#  output = response.registers
-#  zahl = output[3] << 16
-#  zahl |= output[4]
-#  strStatus = "RFID Whitelist UID RFID " + str(count) + ": " + str(hex(zahl))
-#  print(strStatus)
-#  anzahl += 1
-#  reg += 5
-#
+
 print('Hello user Ende Abfrage')

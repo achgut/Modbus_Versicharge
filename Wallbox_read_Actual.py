@@ -80,8 +80,16 @@ def main():
     elif(response.registers == [4]):
       strStatus = "Charger Status: C (Charging)" 
       print(strStatus)
+    elif(response.registers == [5]):
+      responsepause = client.read_holding_registers(address=1629,count=1,unit=UNIT)
+      if(responsepause.registers == [1]):
+        strStatus = "Charger Status D und Pause an"
+        print(strStatus)
+      else:
+        strStatus = "Charger Status D und keine Pause"
+        print(strStatus)
     else:
-      print("Charging Fehler D oder F")  
+      print("Charging Fehler F")  
   
     #Charger Delay
     response = client.read_holding_registers(address=26,count=1,unit=UNIT)
