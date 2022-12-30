@@ -108,13 +108,9 @@ def main():
     print(strStatus)
     
     # Production Date
+    # Word 1: YYYY, Word 2: MMDD
     response = client.read_holding_registers(address=5,count=2,unit=UNIT)
-    output = response.registers
-    liste = list()
-    for i in output:
-        lower = i
-        liste.append(str(lower))
-    strStatus = "Production Date: " + str(liste[1][0:2]) + "." +str(liste[1][2:4]) + "." + str(liste[0])
+    strStatus = "Production Date: " + str(response.registers[1] & 0xff) + "." + str((response.registers[1] & 0xff00) >>8) + "." + str(response.registers[0])
     print(strStatus)
 
    # FW
