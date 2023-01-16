@@ -50,9 +50,10 @@ print("-" * separator)
 print(">>> Registerabfragen nach Bereich <<<")
 print("*" * separator)
 
-start = 1660             # Anfangsregister
-end = 1662            # Enderegister +1
-anzahl = 1               # Anzahl der Bytes
+
+start = 1852            # Anfangsregister
+end = 1877            # Enderegister +1
+anzahl = 5               # Anzahl der Bytes
 helper = 0
 print("-" * separator)  
 

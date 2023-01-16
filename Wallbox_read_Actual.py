@@ -22,6 +22,9 @@
 #  // Active Power Phase Sum wird bei Strömen über 10A falsch berechnet (Register 1665)
 #  // Minimal Current: Muss als 7A eingestellt werden. Regelung dann auf 6A.
 #  // Phasenumschaltung funktioniert nicht - Läd immmer mit 3 Phasen teilweise Absturz Wallbox
+
+# Update FW 1.120:
+# Fallback Settings (Reg 1660/1661) funktionieren (lesbar)
 #************************************************************************************
 
 #Imports
@@ -156,12 +159,12 @@ def main():
     strStatus = "Power Factor (L1 L2 L3 Sum): " + str(response.registers[0] / 100) + " " + str(response.registers[1] / 100) + " "  + str(response.registers[2] / 100) + " "  + str(response.registers[3] / 100) + " "
     print(strStatus)
     #Failsafe Settings Current
-    response = client.read_holding_registers(address=1602,count=1,unit=UNIT) # Register 1660 !!!!
-    strStatus = "Reg 1660 Fallback Current (Fake Value): " + str(response.registers[0]) + "A"
+    response = client.read_holding_registers(address=1660,count=1,unit=UNIT) # Register 1660 !!!!
+    strStatus = "Fallback Current: " + str(response.registers[0]) + "A"
     print(strStatus)
     #Failsafe Settings Time
-    response = client.read_holding_registers(address=1601,count=2,unit=UNIT) # Register 1661 !!!!
-    strStatus = "Reg 1661 Fallback Time (Fake Value): " + str(response.registers[0]) + "s"
+    response = client.read_holding_registers(address=1661,count=2,unit=UNIT) # Register 1661 !!!!
+    strStatus = "Fallback Time: " + str(response.registers[0]) + "s"
     print(strStatus)
   #Total Charing engery
     response = client.read_holding_registers(address=1692,count=2,unit=UNIT)

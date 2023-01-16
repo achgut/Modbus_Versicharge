@@ -142,7 +142,12 @@ def main():
 
   # Connectivity Charger
     response = client.read_holding_registers(address=27,count=1,unit=UNIT)
-    strStatus = "Connectivity Charger (3=Cellular -> Falsch): " + str(response.registers[0])
+    strStatus = "Connectivity Charger (3=Cellular -> Falsch sollte 2 sein): " + str(response.registers[0])
+    print(strStatus)   
+  
+  # UTC Timezone
+    response = client.read_holding_registers(address=23,count=1,unit=UNIT)
+    strStatus = "UTC Time (Falsch, sollte UTC+1 sein): UTC + " + str(response.registers[0]/60) + "h"
     print(strStatus)   
     
   # Outlets
@@ -194,7 +199,28 @@ def main():
       print(strStatus)
       count += 1
       reg += 5
+# RFID Admin Whitelist
+    response = client.read_holding_registers(address=1852,count=1,unit=UNIT)
+    whitelistcount = response.registers[0]
+    strStatus = "RFID Admin Whitelist Anzahl: " + str(whitelistcount)
+    print(strStatus)
 
+    count = 0
+    reg = 1853
+    while count < whitelistcount :
+      response = client.read_holding_registers(address=reg,count=5,unit=UNIT)
+      output = response.registers
+      zahl2 = output[0] 
+      zahl1 = output[1] << 16
+      zahl1 |= output[2] 
+      zahl = output[3] << 16
+      zahl |= output[4]
+      strStatus = "RFID Admin Whitelist UID RFID " + str(count) + ": " + str(hex(zahl2)) + str(hex(zahl1))[2:] + str(hex(zahl))[2:]
+      print(strStatus)
+      count += 1
+      reg += 5
+
+    
     print("-" * separator)
     print(">>> Charger Status <<<")
     print("-" * separator)
