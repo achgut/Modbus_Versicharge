@@ -65,6 +65,10 @@ def main():
     #Temperature PCB
     response = client.read_holding_registers(address=1602,count=1,unit=UNIT)
     print("Temperatur PCB: " + str(response.registers[0]) + "°C")
+
+    #Undokumentiert Reg 1600
+    response = client.read_holding_registers(address=1600,count=1,unit=UNIT)
+    print("Reg 1600: " + str(response.registers[0]))
   
     #Charger Status
     response = client.read_holding_registers(address=1601,count=1,unit=UNIT)
@@ -152,7 +156,15 @@ def main():
     print(strStatus)
     #Reactive Power L1 - L3
     response = client.read_holding_registers(address=1674,count=4,unit=UNIT)
-    strStatus = "Reactive Power (L1 L2 L3 Sum): " + str(response.registers) + " VA reactive"
+    helper = 0
+    strStatus = "Reactive Power (L1 L2 L3 Sum): "  
+    while helper < 4 :   
+      RP = int(response.registers[helper]) 
+      if (RP & (1 << (16 - 1))) != 0:
+        RP = RP - (1 << 16)
+      helper += 1     
+      strStatus = strStatus + str(RP) + " "
+    strStatus = strStatus + "VA Reactive Power"
     print(strStatus)
     #Power Factor L1 - L3
     response = client.read_holding_registers(address=1666,count=4,unit=UNIT)

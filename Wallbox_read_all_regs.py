@@ -50,9 +50,17 @@ print("-" * separator)
 print(">>> Registerabfragen nach Bereich <<<")
 print("*" * separator)
 
-start = 1660            # Anfangsregister
-end = 1662            # Enderegister +1
-anzahl = 1               # Anzahl der Bytes
+start = 338            # Anfangsregister
+end = 355            # Enderegister +1
+anzahl = 5
+
+
+
+
+
+
+
+              # Anzahl der Bytes
 helper = 0
 print("-" * separator)  
 while start < end :       
@@ -62,7 +70,7 @@ while start < end :
   try: 
     strStatus = "Register " + str(start) + " (" + str(anzahl) + " Bytes): " 
     while helper < anzahl :   
-      strStatus = strStatus + " : " + str(response.registers[helper])
+      strStatus = strStatus + str(hex(response.registers[helper])) + " "
       helper += 1                                                         
     print(strStatus)
   except:
