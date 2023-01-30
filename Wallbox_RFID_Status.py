@@ -44,17 +44,52 @@ client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger
 print("-" * separator)
 
 #Special Read Register
-print("*" * separator)
 print("Reading data from Versicharge Wallbox: " + str(clientIP) + ":" + str(clientPort))
 print("-" * separator)
-print(">>> Registerabfragen nach Bereich <<<")
-print("*" * separator)
 
+#Charger Status
+response = client.read_holding_registers(address=1601,count=1,unit=UNIT)
+strStatus = "Charger Status: " + str(response.registers[0])
+chargerstatus = response.registers[0]
+print(strStatus)
+if(response.registers == [1]):
+  strStatus = "Charger Status: A (Power On)"
+  print(strStatus)
+elif(response.registers == [2]):
+  strStatus = "Charger Status: B (Connected)" 
+  print(strStatus)
+elif(response.registers == [3]):
+  strStatus = "Charger Status: C (Charging)" 
+  print(strStatus)
+elif(response.registers == [4]):
+  strStatus = "Charger Status: C (Charging)" 
+  print(strStatus)
+elif(response.registers == [5]):
+  responsepause = client.read_holding_registers(address=1629,count=1,unit=UNIT)
+  if(responsepause.registers == [1]):
+    strStatus = "Charger Status D und Pause an"
+    print(strStatus)
+  else:
+    strStatus = "Charger Status D und keine Pause"
+    print(strStatus)
+else:
+  print("Charging Fehler F")  
+#RFID on?
+response = client.read_holding_registers(address=79,count=1,unit=UNIT)
+strStatus = "RFID Status: " + str(response.registers[0])
+print(strStatus)
+if(response.registers == [0]):
+  strStatus = "RFID disabled" 
+  print(strStatus)
+elif(response.registers == [1]):
+  strStatus = "RFID enabled" 
+  print(strStatus)
+else:
+  print("RFID nicht erkannt")  
+#Read RFID Erkennung
 start = 338            # Anfangsregister
 end = 339            # Enderegister +1
 anzahl = 5
-
-
 
               # Anzahl der Bytes
 helper = 0
@@ -64,7 +99,7 @@ while start < end :
 #
 #   print(response)
   try: 
-    strStatus = "Register " + str(start) + " (" + str(anzahl) + " Bytes): " 
+    strStatus = "Register " + str(start) + " (" + str(anzahl) + " Bytes RFID Karte erkannt): " 
     while helper < anzahl :   
       strStatus = strStatus + str(hex(response.registers[helper])) + " "
       helper += 1                                                         
@@ -74,5 +109,5 @@ while start < end :
   start += 1
   helper = 0
 
-
+print("-" * separator)
 print('Hello user Ende Abfrage')

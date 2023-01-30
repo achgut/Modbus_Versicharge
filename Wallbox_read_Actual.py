@@ -114,6 +114,19 @@ def main():
       print(strStatus)
     else:
       print("RFID nicht erkannt")  
+
+    # RFID Karte erkannt
+    helper = 0  
+    response = client.read_holding_registers(address=338,count=5) #,unit=UNIT) 
+    try: 
+      strStatus = "RFID Karte: " 
+      while helper < 5 :   
+        strStatus = strStatus + str(hex(response.registers[helper])) + " "
+        helper += 1                                                         
+      print(strStatus)
+    except:
+      print("Register " + str(start) + " :Error " + str(response)) 
+
     #MaxCurrent
     response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
     print("Max Charging Current: " + str(response.registers[0]) + " A")
