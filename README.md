@@ -6,4 +6,4 @@ Steuerung und Test einer Versicharge Wallbox von Siemens
 FW Stand: 2.120
 
 Modbus Map:
-https://support.industry.siemens.com/cs/attachments/109814359/versicharge_wallbox_modBus_map_en-US-FINAL.pdf
+https://support.industry.siemens.com/cs/attachments/109814359/109814359_versicharge_wallbox_modBus_map_en-US.pdf?download=true
