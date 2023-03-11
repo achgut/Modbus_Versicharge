@@ -142,7 +142,7 @@ def main():
 
   # Connectivity Charger
     response = client.read_holding_registers(address=27,count=1,unit=UNIT)
-    strStatus = "Connectivity Charger (3=Cellular -> Falsch sollte 2 sein): " + str(response.registers[0])
+    strStatus = "Connectivity Stream (3=Ethernet): " + str(response.registers[0])
     print(strStatus)   
   
   # UTC Timezone
@@ -227,7 +227,10 @@ def main():
 
     #Temperature PCB
     response = client.read_holding_registers(address=1602,count=1,unit=UNIT)
-    strStatus = "Temperatur PCB: " + str(response.registers[0]) + "°C"
+    t = response.registers[0]
+    if t > 65000 :
+      t = t - 65536
+    strStatus = "Temperatur PCB: " + str(t) + "°C"
     print(strStatus)
 
     #Charger Status

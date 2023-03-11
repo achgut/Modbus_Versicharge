@@ -51,7 +51,7 @@ print(">>> Registerabfragen nach Bereich <<<")
 print("*" * separator)
 
 start = 338            # Anfangsregister
-end = 339            # Enderegister +1
+end = 350            # Enderegister +1
 anzahl = 5
 
 

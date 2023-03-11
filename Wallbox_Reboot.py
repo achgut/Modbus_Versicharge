@@ -35,7 +35,7 @@ try:
 
     # Reboot
     
-    client.write_register(address=1826,value=2,unit=UNIT)
+    client.write_register(address=1826,value=1,unit=UNIT)
     
 except:
     print("-" * separator)

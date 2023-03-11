@@ -62,17 +62,38 @@ def main():
     print(datetime.now())
     print("-" * separator)
   
+    # FW
+    response = client.read_holding_registers(address=31,count=10,unit=UNIT)
+    output = response.registers
+    liste = list()
+    for i in output:
+        lower = i & 0b11111111
+        upper = (i & 0b1111111100000000) >> 8
+        liste.append(chr(upper))
+        liste.append(chr(lower))
+    strStatus = "FW: " + "".join(liste)
+    print(strStatus)
+
     #Temperature PCB
     response = client.read_holding_registers(address=1602,count=1,unit=UNIT)
-    print("Temperatur PCB: " + str(response.registers[0]) + "°C")
+    t = response.registers[0]
+    if t > 65000 :
+      t = t - 65536
+    strStatus = "Temperatur PCB: " + str(t) + "°C"
+    print(strStatus)
 
-    #Undokumentiert Reg 1600
+
+    #Reg 1599 - EVSE State
+  #  response = client.read_holding_registers(address=1599,count=1,unit=UNIT)
+  #  print("EVSE State: " + str(response.registers[0]))
+    
+    #Reg 1600 - EVSE Error Code
     response = client.read_holding_registers(address=1600,count=1,unit=UNIT)
-    print("Reg 1600: " + str(response.registers[0]))
+    print("EVSE Error Code: " + str(response.registers[0]))
   
     #Charger Status
     response = client.read_holding_registers(address=1601,count=1,unit=UNIT)
-    strStatus = "Charger Status: " + str(response.registers[0])
+    strStatus = "Charger Status (OCPP State): " + str(response.registers[0])
     chargerstatus = response.registers[0]
     print(strStatus)
     if(response.registers == [1]):
