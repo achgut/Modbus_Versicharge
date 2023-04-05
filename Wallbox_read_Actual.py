@@ -84,8 +84,8 @@ def main():
 
 
     #Reg 1599 - EVSE State
-  #  response = client.read_holding_registers(address=1599,count=1,unit=UNIT)
-  #  print("EVSE State: " + str(response.registers[0]))
+    response = client.read_holding_registers(address=1599,count=1,unit=UNIT)
+    print("EVSE State: " + str(response.registers[0]))
     
     #Reg 1600 - EVSE Error Code
     response = client.read_holding_registers(address=1600,count=1,unit=UNIT)
@@ -182,7 +182,7 @@ def main():
     print(strStatus)
     #Power L1 - L3
     response = client.read_holding_registers(address=1662,count=4,unit=UNIT)
-    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers) + " " + str(response.registers[3] / 10) + " W"
+    strStatus = "Charging Power (L1 L2 L3 Sum): " + str(response.registers) + " W"
     print(strStatus)
     #Apparent Power L1 - L3
     response = client.read_holding_registers(address=1670,count=4,unit=UNIT)
