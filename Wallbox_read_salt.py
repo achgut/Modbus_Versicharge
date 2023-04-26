@@ -2,15 +2,16 @@
 # Modbus reading Python script.                       #
 # More details in document                            #
 # Modbus Map Versicharge Gen 3                        #
-#                                                     #
-# Version 1.0                                         #
-# November, 2022                                      #
-# Author: Achim      achgut                           #
 #######################################################
+#
+# 2022 achgut
+
+# Read salt
 
 #Imports
 from pymodbus.client import ModbusTcpClient
-import datetime
+import time
+from datetime import datetime
 from struct import *
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
@@ -27,17 +28,37 @@ clientIP="192.168.178.63" #Charger's IP address
 
 ################################################
 
-# Read data
-# Charger data
-try:
+def main():
+  try: 
     #Try to connect to client
     client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
+    time.sleep(2)
+    
+    #Print connection info
+    print("*" * separator)
+    print("Reading data from Versicharge Wallbox: " + str(clientIP) + ":" + str(clientPort))
+    print("-" * separator)
+    print(">>> REAL-TIME VALUES Dynamic <<<")
+    print("-" * separator)
+    print(datetime.now())
+    print("-" * separator)
+  
+    # Salt
 
-    # Reboot
-    
-    client.write_register(address=1826,value=2,unit=UNIT)
-    
-except:
+    helper = 0  
+    response = client.read_holding_registers(address=1827,count=3) #,unit=UNIT) 
+    try: 
+      strStatus = "Salt: " 
+      while helper < 3 :   
+        strStatus = strStatus + str(hex(response.registers[helper])) + " "
+        helper += 1                                                         
+      print(strStatus)
+    except:
+      print("Register " + str(start) + " :Error " + str(response)) 
+  
+  except:
     print("-" * separator)
     print("An error has occurred during cluster data reading!")
 
+if __name__ == "__main__":
+  main()

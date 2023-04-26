@@ -147,7 +147,7 @@ def main():
   
   # UTC Timezone
     response = client.read_holding_registers(address=23,count=1,unit=UNIT)
-    strStatus = "UTC Time (Falsch, sollte UTC+1 sein): UTC + " + str(response.registers[0]/60) + "h"
+    strStatus = "UTC Time (Falsch, sollte UTC+1/2 (WZ/SZ) sein): UTC + " + str(response.registers[0]/60) + "h"
     print(strStatus)   
     
   # Outlets

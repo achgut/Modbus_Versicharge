@@ -202,7 +202,7 @@ def main():
     print(strStatus)
     #Power Factor L1 - L3
     response = client.read_holding_registers(address=1666,count=4,unit=UNIT)
-    strStatus = "Power Factor (L1 L2 L3 Sum): " + str(response.registers[0] / 100) + " " + str(response.registers[1] / 100) + " "  + str(response.registers[2] / 100) + " "  + str(response.registers[3] / 100) + " "
+    strStatus = "Power Factor (L1 L2 L3 Sum): " + str(response.registers[0] / 1000) + " " + str(response.registers[1] / 1000) + " "  + str(response.registers[2] / 1000) + " "  + str(response.registers[3] / 1000) + " "
     print(strStatus)
     #Failsafe Settings Current
     response = client.read_holding_registers(address=1660,count=1,unit=UNIT) # Register 1660 !!!!
