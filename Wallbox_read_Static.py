@@ -31,6 +31,7 @@ from datetime import datetime
 from struct import *
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
+from pymodbus.payload import BinaryPayloadBuilder
 
 #Initialisations
 UNIT = 1
@@ -50,7 +51,7 @@ def main():
   try:
     #Try to connect to client
     client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
-
+    connection = client.connect()
     #Print connection info
     print("*" * separator)
     print("Reading data from Versicharge Wallbox: " + str(clientIP) + ":" + str(clientPort))
@@ -68,7 +69,7 @@ def main():
 
     #Manufacturer
     response = client.read_holding_registers(address=0,count=5,unit=UNIT)
-    
+
     output = response.registers
     liste = list()
     for i in output:
@@ -273,7 +274,8 @@ def main():
     else:
       print("Charging Fehler D oder F")  
 
-
+    client.close()
+  
   except:
     print("-" * separator)
     print("An error has occurred during cluster data reading!")

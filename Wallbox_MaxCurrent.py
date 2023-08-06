@@ -37,6 +37,7 @@ def main(amp):
     try:
       #Try to connect to client
       client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
+      connection = client.connect()
        #MaxCurrent?
       response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
       strStatus = "Max Current: " + str(response.registers[0]) + "A"
@@ -47,6 +48,7 @@ def main(amp):
       response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
       strStatus = "Max Current: " + str(response.registers[0]) + "A"
       print(strStatus)
+      client.close()
     except:
       print("-" * separator)
       print("An error has occurred during cluster data reading!")

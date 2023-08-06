@@ -49,10 +49,11 @@ clientIP="192.168.178.63" #Charger's IP address
 
 def main():
   try: 
+    time.sleep(2)
     #Try to connect to client
     client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
-    time.sleep(2)
-    
+    connection = client.connect()
+
     #Print connection info
     print("*" * separator)
     print("Reading data from Versicharge Wallbox: " + str(clientIP) + ":" + str(clientPort))
@@ -109,8 +110,8 @@ def main():
       strStatus = "Charger Status: C (Charging)" 
       print(strStatus)
     elif(response.registers == [5]):
-      responsepause = client.read_holding_registers(address=1629,count=1,unit=UNIT)
-      if(responsepause.registers == [1]):
+      responseMaxCurrent = client.read_holding_registers(address=1633,count=1,unit=UNIT)
+      if(responseMaxCurrent.registers == 0):
         strStatus = "Charger Status D und Pause an"
         print(strStatus)
       else:
@@ -146,22 +147,21 @@ def main():
         helper += 1                                                         
       print(strStatus)
     except:
-      print("Register " + str(start) + " :Error " + str(response)) 
+      print("Register " + str(338) + " :Error " + str(response)) 
 
     #MaxCurrent
     response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
     print("Max Charging Current: " + str(response.registers[0]) + " A")
   
     #Pausiert?
-    response = client.read_holding_registers(address=1629,count=1,unit=UNIT)
-    if(response.registers == [1]):
+    response = client.read_holding_registers(address=1633,count=1,unit=UNIT)
+    if(response.registers == [0]):
       strStatus = "Pause an : " + str(response.registers[0])
       print(strStatus)
-    elif(response.registers == [2]):
+    else:
       strStatus = "Pause aus : " + str(response.registers[0])
       print(strStatus)
-    else:
-      print("Pause nicht erkannt")  
+ 
     #1 oder 3 Phasig
     response = client.read_holding_registers(address=1642,count=1,unit=UNIT)
     if(response.registers == [1]):
@@ -220,7 +220,8 @@ def main():
     zahl /= 10000.0
     strStatus = "Total Charging Energy (kWh): " + str(zahl) + "kWh"
     print(strStatus)
-  
+    client.close()
+
   except:
     print("-" * separator)
     print("An error has occurred during cluster data reading!")
