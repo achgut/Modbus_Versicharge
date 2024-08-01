@@ -146,7 +146,7 @@ def main():
     strStatus = "Connectivity Stream (3=Ethernet): " + str(response.registers[0])
     print(strStatus)   
   
-  # UTC Timezone
+  # UTC Timezone -> seit FW 2.135 nicht mehr da.... Buffer
     response = client.read_holding_registers(address=23,count=1,unit=UNIT)
     strStatus = "UTC Time (Falsch, sollte UTC+1/2 (WZ/SZ) sein): UTC + " + str(response.registers[0]/60) + "h"
     print(strStatus)   
