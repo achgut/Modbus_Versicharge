@@ -37,6 +37,7 @@ clientIP="192.168.178.63" #Charger's IP address
 ################################################
 
 client = ModbusTcpClient(clientIP, clientPort) #Use port 502 for reading charger's data
+connection = client.connect()
 
 # Wallbox_read_Static
 # Wallbox_read_Actual
@@ -74,5 +75,5 @@ while start < end :
   start += 1
   helper = 0
 
-
+client.close()
 print('Hello user Ende Abfrage')

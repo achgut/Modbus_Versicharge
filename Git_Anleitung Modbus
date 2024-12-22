@@ -1,0 +1,12 @@
+Modubs Versicharge:
+
+Lokales Commit der Änderungen lokale Datei:
+Source Control -> Commit mit Bemerkung
+
+Verzeichnis ModbusVersicharge
+
+GitHub Änderungen ins lokale Git schieben:
+git pull https://github.com/achgut/Modbus_Versicharge.git
+
+danach lokale Änderungen nach Online schieben:
+git push https://github.com/achgut/Modbus_Versicharge.git

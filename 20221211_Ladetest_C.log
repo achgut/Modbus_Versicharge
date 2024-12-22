@@ -1,0 +1,54 @@
+Test Umschalten auf 1 Phasig beim Laden
+# Auto angeschlossen, Läd 3phasig mit 15A, dann Start
+# Max Current wird immer wieder verändert
+
+# Fehler während 3 phasiges Laden:
+# Fehler 1: Max Current wird um 1A vermindert (10A -> 9A, 7A -> 6A)
+# Fehler 2: Charging Power Summe falsch bei MaxCurrent > 10A
+# Fehler 3: Reactive Power falsche Werte
+# Fehler 4: Fallback Settings, Register nicht lesbar
+
+Nach Umschalten auf 1phasiges Laden:
+# Fehler 5: Absturz nach einiger Zeit, nachdem auf 1phasig umgeschaltet und Max Current verändert wurde.
+# danach MaxCurrent auf 0A -> läd aber mit 4kW
+
+Start Sequenz in  120 s
+ 
+2022-12-11 09:22:29.937359
+Max Current: 6A
+Set to  10  A
+Max Current: 10A
+Maxcurrent auf 10A
+ 
+2022-12-11 09:24:30.943468
+Max Current: 9A
+Set to  15  A
+Max Current: 15A
+Maxcurrent auf 15A
+ 
+2022-12-11 09:26:31.299111
+Max Current: 14A
+Set to  7  A
+Max Current: 7A
+Maxcurrent auf 7A
+ 
+2022-12-11 09:28:31.690071
+3 Phasiges Laden 1
+Auf 1 Phasig umschalten  
+1 Phasiges Laden 0
+Umschalten auf 1phasig
+ 
+2022-12-11 09:30:31.997308
+--------------------------------------------------------------------------------
+An error has occurred during cluster data reading!
+Maxcurrent auf 10A
+ 
+2022-12-11 09:32:32.008821
+Max Current: 0A
+Set to  7  A
+Max Current: 7A
+Maxcurrent auf 7A
+ 
+Nach Ablauf LadetestC, noch folgende händische Aktionen
+09:38:30 Current auf 15A
+09:40:00 Pause an
